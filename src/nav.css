@@ -1,0 +1,44 @@
+.nav{
+    display: flex;
+    justify-content: space-between;
+    background: black;
+}
+.left-nav{
+    margin-left:30px ;
+}
+.left-nav h1{
+    display: inline;
+    color: #fff;
+}
+
+.right-nav{
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+}
+
+
+.cart {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    color: white;
+    font-size: 20px;
+}
+
+.cart-count {
+    position: absolute;
+
+    top: -12px;
+    left: 25px;
+
+    color: orange;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+
+

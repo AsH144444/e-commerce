@@ -1,19 +1,21 @@
-export function Nav(){
+import './nav.css'
 
-    return(
-        <div>
-            <div>
+export function Nav() {
+    return (
+        <div className="nav">
+            <div className="left-nav">
                 <h1>Veyro</h1>
             </div>
-            <div>
-                <div>
-                    <input></input>
+            <div className="right-nav">
+                <div className="search">
+                    <input type="search" placeholder="Search..." />
                     <button>search</button>
                 </div>
-                <p>cart</p>
+                <div className="cart">
+                    <span className="cart-count">0</span>
+                    🛒 <b>Cart</b>
+                </div>
             </div>
-
         </div>
     )
-
 }
