@@ -11,11 +11,12 @@ export function Nav() {
                     <input type="search" placeholder="Search..." />
                     <button>search</button>
                 </div>
-                <div className="cart">
+
+            </div>
+                            <div className="cart">
                     <span className="cart-count">0</span>
                     🛒 <b>Cart</b>
                 </div>
-            </div>
         </div>
     )
 }
