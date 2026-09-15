@@ -9,7 +9,7 @@ export function Nav() {
             <div className="right-nav">
                 <div className="search">
                     <input type="search" placeholder="Search..." />
-                    <button>search</button>
+                    <button>{<i class="fa-solid fa-magnifying-glass"></i>}</button>
                 </div>
 
             </div>
