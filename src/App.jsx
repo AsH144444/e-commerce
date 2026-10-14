@@ -1,4 +1,5 @@
 import { Nav } from './nav'
+import { Homepage } from './Homepage'
 import './App.css'
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <>
       
       <Nav/>
+      <Homepage/>
     </>
   )
 }
