@@ -1,57 +1,106 @@
-body{
-    background-color: #e6e6e6;
-}
 .categories {
-  display: grid;
-  grid-template-columns: repeat(3, 325px);
-  gap: 60px;
-  justify-content: center;
-  background-color: #e6e6e6;
-  padding: 10px 0px 0px 10px;
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 280px), 325px)
+    );
+
+    gap: clamp(16px, 3vw, 35px);
+    justify-content: center;
+
+    width: 100%;
+    padding: 25px 16px;
 }
 
 .category-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background : linear-gradient(#7b7c7c,#d6d5d6);
-  width: auto;
-  border-radius: 10%;
-  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    min-width: 0;
+
+    background: linear-gradient(#7b7c7c, #d6d5d6);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
+
+.category-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
 .category-card img {
     display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: contain;
-  padding: 28px;}
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    object-fit: contain;
+    padding: 20px;
+}
 
 .category-card-h2 {
-    padding-bottom: 10px;
-    background: #fff;
     width: 100%;
-    text-align: center;
+    margin: 0;
+    padding: 14px 8px;
 
+    background: white;
+    text-align: center;
+    font-size: clamp(16px, 2vw, 21px);
+    text-transform: capitalize;
+
+    overflow-wrap: anywhere;
 }
+
+/* Tablet */
 @media (max-width: 1000px) {
-  .categories {
-  display: grid;
-  grid-template-columns: repeat(2, 325px);
-  gap: 60px;
-  justify-content: center;
-  background-color: #e6e6e6;
-  padding: 10px 0px 0px 10px;
+    .categories {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(min(100%, 260px), 325px)
+        );
+    }
 }
-  
-}
+
+/* Mobile */
 @media (max-width: 600px) {
-  .categories {
-  display: grid;
-  grid-template-columns: repeat(1, 325px);
-  gap: 60px;
-  justify-content: center;
-  background-color: #e6e6e6;
-  padding: 10px 0px 0px 10px;
+    .categories {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        padding: 16px 12px;
+    }
+
+    .category-card img {
+        padding: 12px;
+    }
+
+    .category-card-h2 {
+        padding: 10px 5px;
+        font-size: 15px;
+    }
 }
-  
+
+/* Very small phones */
+@media (max-width: 350px) {
+    .categories {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .category-card {
+        transition: none;
+    }
+
+    .category-card:hover {
+        transform: none;
+    }
 }

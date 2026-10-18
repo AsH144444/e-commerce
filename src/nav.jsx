@@ -1,11 +1,15 @@
 
+import { Link } from 'react-router-dom'
 import './nav.css'
 
 export function Nav() {
     return (
         <div className="nav">
             <div className="left-nav">
-                <h1>Veyro</h1>
+                <Link to={"/"}>
+                    <h1>Veyro</h1>
+                </Link>
+            
             </div>
             <div className="right-nav">
                 <div className="search">
