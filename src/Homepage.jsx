@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import './homepages.css'
 
 export function Homepage() {
+  
   const [products, setProducts] = useState([]);
   function handelcard(pro_name){
     console.log(pro_name)
@@ -30,7 +31,7 @@ export function Homepage() {
 
       <div className="categories" >
         {categories.map((product) => (
-          <div className="category-card" key={product.category} onClick={(e) =>
+          <div className="category-card" key={product.category} onClick={() =>
             handelcard(product.category)
           }>
             <img src={product.thumbnail} alt={product.category} />

@@ -14,13 +14,15 @@
 .left-nav {
     min-width: 0;
 }
-
-.left-nav h1 {
-      text-decoration: none;
-  text-decoration: none;
+.logo {
   color: white;
+  text-decoration: none;
+  font-size: 36px;
+  font-weight: bold;
   cursor: pointer;
-  cursor: pointer;
+}
+.left-nav h1 {
+
     margin: 0;
     font-size: clamp(20px, 3vw, 30px);
 }
