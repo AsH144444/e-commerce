@@ -1,13 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import './homepages.css'
 
 export function Homepage() {
   
   const [products, setProducts] = useState([]);
-  function handelcard(pro_name){
-    console.log(pro_name)
-  }
+    const navigate = useNavigate();
+function handelcard(category) {
+  if (!category.trim()) return;
+  navigate(`/catagories?category=${encodeURIComponent(category.trim())}`);
+}
 
   useEffect(() => {
     axios.get("https://dummyjson.com/products?limit=50")
