@@ -1,10 +1,11 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Nav } from "./nav";
 import "./cart.css";
 
 export function Cart() {
+    const navigate = useNavigate();
     const [cart, setCart] = useState(() => {
         return JSON.parse(localStorage.getItem("cart")) || [];
     });
@@ -150,9 +151,12 @@ export function Cart() {
                                 <h3>${total.toFixed(2)}</h3>
                             </div>
 
-                            <button className="checkout-btn">
-                                Proceed to Checkout
-                            </button>
+                          <button
+    className="checkout-btn"
+    onClick={() => navigate("/checkout")}
+>
+    Proceed to Checkout
+</button>
 
                             <Link to="/" className="continue-shopping">
                                 Continue Shopping

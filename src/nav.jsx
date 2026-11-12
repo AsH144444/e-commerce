@@ -9,7 +9,7 @@ export function Nav() {
 
     const navigate = useNavigate();
 
-    // Get cart count from localStorage
+
     useEffect(() => {
         function updateCount() {
             const cart = JSON.parse(localStorage.getItem("cart")) || [];

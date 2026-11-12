@@ -1,7 +1,7 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import "./categories.css";
 import { Nav } from "./nav";
 
@@ -10,67 +10,34 @@ export function Catagories() {
     const [categoryList, setCategoryList] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
 
+    const navigate = useNavigate();
+
     const productName = searchParams.get("q") || "";
     const category = searchParams.get("category") || "";
 
-    // Load cart from localStorage
+    const [nameInput, setNameInput] = useState(productName);
+
     const [cart, setCart] = useState(() => {
         return JSON.parse(localStorage.getItem("cart")) || [];
     });
 
-    // Search input state
-    const [nameInput, setNameInput] = useState(productName);
-
-    // Update input when URL changes
     useEffect(() => {
         setNameInput(productName);
     }, [productName]);
 
-    // Add product to cart
-    function handelcard(product) {
-        setCart((prevCart) => {
-            const existing = prevCart.find(
-                (item) => item.id === product.id
-            );
 
-            let updatedCart;
-
-            if (existing) {
-                updatedCart = prevCart.map((item) =>
-                    item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 }
-                        : item
-                );
-            } else {
-                updatedCart = [
-                    ...prevCart,
-                    { ...product, quantity: 1 }
-                ];
-            }
-
-            localStorage.setItem(
-                "cart",
-                JSON.stringify(updatedCart)
-            );
-
-            // Notify Navbar
-            window.dispatchEvent(new Event("cartUpdated"));
-
-            return updatedCart;
-        });
-    }
-
-    // Fetch category list
     useEffect(() => {
         axios
             .get("https://dummyjson.com/products/category-list")
-            .then((res) => setCategoryList(res.data))
-            .catch((err) =>
-                console.error("Error fetching categories:", err)
-            );
+            .then((res) => {
+                setCategoryList(res.data);
+            })
+            .catch((err) => {
+                console.error("Category error:", err);
+            });
     }, []);
 
-    // Fetch products based on search and category
+
     useEffect(() => {
         let ignore = false;
 
@@ -93,7 +60,7 @@ export function Catagories() {
 
                 let list = res.data.products;
 
-                // Filter products by name inside selected category
+                // Filter by product name inside category
                 if (category && name) {
                     list = list.filter((p) =>
                         p.title.toLowerCase().includes(name)
@@ -102,14 +69,62 @@ export function Catagories() {
 
                 setProducts(list);
             })
-            .catch((err) =>
-                console.error("Error fetching products:", err)
-            );
+            .catch((err) => {
+                if (!ignore) {
+                    console.error("Product error:", err);
+                }
+            });
 
         return () => {
             ignore = true;
         };
     }, [productName, category]);
+
+    // Add product to cart
+    function addToCart(product) {
+        const currentCart =
+            JSON.parse(localStorage.getItem("cart")) || [];
+
+        const existing = currentCart.find(
+            (item) => item.id === product.id
+        );
+
+        let updatedCart;
+
+        if (existing) {
+            updatedCart = currentCart.map((item) =>
+                item.id === product.id
+                    ? {
+                        ...item,
+                        quantity: item.quantity + 1
+                    }
+                    : item
+            );
+        } else {
+            updatedCart = [
+                ...currentCart,
+                {
+                    ...product,
+                    quantity: 1
+                }
+            ];
+        }
+
+        localStorage.setItem(
+            "cart",
+            JSON.stringify(updatedCart)
+        );
+
+        setCart(updatedCart);
+
+        window.dispatchEvent(new Event("cartUpdated"));
+    }
+
+    // Buy Now
+    function handleBuyNow(product) {
+        addToCart(product);
+        navigate("/checkout");
+    }
 
     // Update URL search parameters
     function updateParams(newName, newCategory) {
@@ -146,7 +161,9 @@ export function Catagories() {
                     type="text"
                     placeholder="Search by name..."
                     value={nameInput}
-                    onChange={(e) => setNameInput(e.target.value)}
+                    onChange={(e) =>
+                        setNameInput(e.target.value)
+                    }
                 />
 
                 <select
@@ -178,7 +195,10 @@ export function Catagories() {
                 )}
 
                 {products.map((product) => (
-                    <div className="product-card" key={product.id}>
+                    <div
+                        className="product-card"
+                        key={product.id}
+                    >
                         <img
                             src={product.thumbnail}
                             alt={product.title}
@@ -189,13 +209,20 @@ export function Catagories() {
                         <p>${product.price}</p>
 
                         <div className="btn">
-                            <button className="buy">
+                            <button
+                                className="buy"
+                                onClick={() =>
+                                    handleBuyNow(product)
+                                }
+                            >
                                 Buy Now
                             </button>
 
                             <button
                                 className="card"
-                                onClick={() => handelcard(product)}
+                                onClick={() =>
+                                    addToCart(product)
+                                }
                             >
                                 Add to Cart
                             </button>

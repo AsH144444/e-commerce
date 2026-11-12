@@ -1,0 +1,92 @@
+
+.checkout-page {
+    min-height: 80vh;
+    padding: 30px 5%;
+    background: #f8f8f8;
+}
+
+.checkout-page > h1 {
+    margin-bottom: 30px;
+}
+
+.checkout-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.customer-form,
+.checkout-summary {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.customer-form h2,
+.checkout-summary h2 {
+    margin-bottom: 25px;
+}
+
+.customer-form label {
+    display: block;
+    margin: 15px 0 8px;
+}
+
+.customer-form input,
+.customer-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font: inherit;
+}
+
+.customer-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.customer-form button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.checkout-item,
+.checkout-total {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 18px 0;
+}
+
+.checkout-item span:first-child {
+    flex: 1;
+}
+
+.checkout-total {
+    font-size: 18px;
+}
+
+@media (max-width: 800px) {
+    .checkout-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+    .checkout-page {
+        padding: 20px 12px;
+    }
+
+    .customer-form,
+    .checkout-summary {
+        padding: 18px;
+    }
+}

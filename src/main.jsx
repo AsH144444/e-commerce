@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.jsx'
 import { Cart } from './cart.jsx'
 import { Catagories } from './categories.jsx'
+import { Checkout } from "./checkout.jsx"
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 const router =createBrowserRouter([{
   path:"/",element:<App/>
@@ -14,6 +15,10 @@ const router =createBrowserRouter([{
 },
 {
   path:"/cart",element:<Cart/>
+},
+{
+    path: "/checkout",
+    element: <Checkout />
 }]);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
